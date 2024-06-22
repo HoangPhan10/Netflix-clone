@@ -11,8 +11,8 @@ RUN yarn build
 
 FROM nginx:stable-alpine
 WORKDIR /usr/share/nginx/html
-COPY --from=builder ./.git .
 RUN rm -rf ./*
 COPY --from=builder /app/dist .
+COPY --from=builder /app/.git ./.git
 EXPOSE 80
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
